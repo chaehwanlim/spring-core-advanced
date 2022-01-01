@@ -1,6 +1,7 @@
 package hello.advanced.trace.strategy;
 
 import hello.advanced.trace.strategy.code.context.ContextV1;
+import hello.advanced.trace.strategy.code.strategy.Strategy;
 import hello.advanced.trace.strategy.code.strategy.StrategyLogic1;
 import hello.advanced.trace.strategy.code.strategy.StrategyLogic2;
 import lombok.extern.slf4j.Slf4j;
@@ -51,6 +52,16 @@ public class ContextV1Test {
         StrategyLogic2 strategyLogic2 = new StrategyLogic2();
         ContextV1 contextV2 = new ContextV1(strategyLogic2);
         contextV2.execute();
+    }
+
+    // 더 편하게 쓸 수 있는 방법
+    @Test
+    void strategyV2() {
+        ContextV1 context1 = new ContextV1(() -> log.info("비즈니스 로직1 실행"));
+        context1.execute();
+
+        ContextV1 context2 = new ContextV1(() -> log.info("비즈니스 로직2 실행"));
+        context2.execute();
     }
 
 }
